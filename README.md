@@ -81,7 +81,22 @@ chmod +x install.sh && sudo ./install.sh --blood-red
 ```
 
 *(Mira el [Wiki](https://github.com/RedTeam-Xtreme/RedTeam-Xtreme/wiki) para más ejemplos brutales.)*  
+``markdown
+## 🐳 Uso con Docker
+```bash
+# Construir la imagen
+docker build -t linuxxckredteam .
 
+# Ejecutar con volumen para persistencia
+docker run -it --rm -v $(pwd)/data:/app/data linuxxckredteam
+```
+
+## 🔥 Módulos Disponibles
+| Módulo          | Descripción                          | Ejemplo de Uso                     |
+|-----------------|--------------------------------------|------------------------------------|
+| `DockerXCK`     | Escaneo de contenedores Docker       | `./DockerXCK --scan 172.17.0.0/24` |
+| `NetworkHunter` | Análisis de redes y puertos          | `./NetworkHunter -t 192.168.1.1`   |
+```
 ---
 ```markdown
 ![Docker Compose](https://via.placeholder.com/800x400/000000/FFFFFF?text=RedTeam-Xtreme+Docker+Compose+Integration)
