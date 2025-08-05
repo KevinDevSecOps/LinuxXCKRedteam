@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  redteamxtreme:
+    build: .
+    image: redteamxtreme:latest
+    container_name: rt-core
+    volumes:
+      - ./logs:/app/logs
+      - ./payloads:/app/config/payloads
+      - ./db:/app/db
+    environment:
+      - STAGING_KEY=YourSecretKeyHere
+      - LHOST=eth0
+    ports:
+      - "4444:4444"   # Metasploit payloads
+      - "8080:8080"   # Web C2 (ej: Covenant)
+    restart: unless-stopped
+    networks:
+      - redteam-net
+
+  metasploit:
+    image: metasploitframework/metasploit-framework:latest
+    container_name: rt-metasploit
+    volumes:
+      - ./msf_data:/home/msf/.msf4
+      - ./payloads:/payloads
+    ports:
+      - "4445:4445"   # Otro puerto para MSF
+    environment:
+      - MSF_DB_PASSWORD=msfpassword
+    networks:
+      - redteam-net
+    command: msfconsole -q -x "db_status; sleep infinity"
+
+  # Opcional: Servidor C2 (ej: Covenant)
+  covenant:
+    image: covenantc2/covenant:latest
+    container_name: rt-covenant
+    ports:
+      - "7443:7443"
+      - "80:80"
+    volumes:
+      - ./covenant:/app/data
+    networks:
+      - redteam-net
+
+networks:
+  redteam-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.13.37.0/24  # Subnet dedicada
