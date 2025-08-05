@@ -89,6 +89,35 @@ chmod +x install.sh && sudo ./install.sh --blood-red
 |----------------------|----------------|  
 | ![Scan Demo](https://via.placeholder.com/400x200/000000/FFFFFF?text=Stealth+Scan+Mode) | ![Exploit Demo](https://via.placeholder.com/400x200/000000/FFFFFF?text=Exploiting+CVE-2023-1234) |  
 
+
+---
+```markdown
+## 🐋 Despliegue con Docker Compose  
+
+Orquesta todos los servicios (RedTeam-Xtreme, Metasploit, C2) con un solo comando:  
+
+```bash
+# 1. Clona el repositorio
+git clone https://github.com/KevinDevSecOps/LinuxXCKRedteam.git
+cd LinuxXCKRedteam
+
+# 2. Inicia los contenedores
+docker-compose up -d
+
+# 3. Accede al contenedor principal
+docker exec -it rt-core bash
+```
+
+### 🌐 Servicios Disponibles  
+| Servicio       | Puerto  | Descripción                |  
+|----------------|---------|----------------------------|  
+| RedTeam-Xtreme | 4444    | Payloads y escaneos         |  
+| Metasploit     | 4445    | Exploits y post-explotación |  
+| Covenant (C2)  | 7443    | C2 Framework (Opcional)     |  
+
+📌 **Nota**: Edita `docker-compose.yml` para cambiar puertos o añadir servicios.  
+```
+
 ---
 
 ## **🧠 Estructura del Proyecto**  
