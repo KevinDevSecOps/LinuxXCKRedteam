@@ -16,3 +16,55 @@ Uso:
 
 docker build -t redteamxtreme .
 docker run -it --rm redteamxtreme --scan 192.168.1.1
+
+# 🔥 Base image: Kali Linux Rolling (oficial)  
+FROM kalilinux/kali-rolling:latest  
+
+# 📌 Metadata (personaliza esto)  
+LABEL maintainer="KevinDevSecOps"  
+LABEL version="2.0"  
+LABEL description="RedTeam-Xtreme: Entorno Docker para operaciones ofensivas con evasion avanzada"  
+
+# 🔧 Instalar dependencias CRÍTICAS (optimizado para tamaño + seguridad)  
+RUN apt update -y && apt upgrade -y --no-install-recommends && \  
+    apt install -y \  
+    python3 \  
+    python3-pip \  
+    nmap \  
+    metasploit-framework \  
+    git \  
+    procps \        # Para sandbox checks  
+    socat \         # Para pivoting  
+    net-tools \     # Para troubleshooting  
+    && apt clean \  
+    && rm -rf /var/lib/apt/lists/*  
+
+# 📥 Clonar repos clave (Impacket + herramientas adicionales)  
+RUN git clone --depth 1 https://github.com/SecureAuthCorp/impacket.git /opt/impacket && \  
+    cd /opt/impacket && pip3 install . && \  
+    git clone --depth 1 https://github.com/PowerShellMafia/PowerSploit /opt/powersploit  
+
+# 📂 Copiar el proyecto (incluyendo módulos de evasion)  
+WORKDIR /app  
+COPY . .  
+
+# 🐍 Instalar requirements Python (asegúrate de tener requirements.txt)  
+RUN pip3 install --no-cache-dir -r requirements.txt && \  
+    chmod +x redteamxtreme.py && \  
+    mkdir -p /app/logs  
+
+# 🛠️ Configurar Metasploit (auto-inicialización)  
+RUN msfdb init && \  
+    echo "log -r /app/logs/msf_console.log" >> ~/.msf4/msfconsole.rc  
+
+# 🚪 Variables de entorno para evasion  
+ENV STAGING_KEY="CHANGE_ME_IN_PROD"  
+ENV PYTHONUNBUFFERED=1  
+ENV TERM=xterm-256color  
+
+# 🔌 Puertos expuestos (ajusta según necesidades)  
+EXPOSE 4444 8080 8443  
+
+# 🏃 Entrypoint optimizado  
+ENTRYPOINT ["python3", "redteamxtreme.py"]  
+CMD ["--help"]
