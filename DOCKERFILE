@@ -1,0 +1,18 @@
+FROM kalilinux/kali-rolling:latest
+
+RUN apt update && apt install -y \
+    python3 \
+    nmap \
+    metasploit-framework \
+    git
+
+WORKDIR /app
+COPY . .
+RUN pip3 install -r requirements.txt
+
+ENTRYPOINT ["python3", "redteamxtreme.py"]
+
+Uso:
+
+docker build -t redteamxtreme .
+docker run -it --rm redteamxtreme --scan 192.168.1.1
