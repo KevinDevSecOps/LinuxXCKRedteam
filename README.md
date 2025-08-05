@@ -1,5 +1,4 @@
 # ♦️LinuxXCKRedteam♦️
-![Docker Integration](https://via.placeholder.com/800x400/000000/FFFFFF?text=RedTeam-Xtreme+Docker+Integration)
 _____           ______      __  __         
 |  __ \ ___  ___|  ____|    |  \/  |_   _  
 | |__) / _ \/ __| |__ ______| |\/| | | | | 
