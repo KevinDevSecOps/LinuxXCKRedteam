@@ -1,3 +1,4 @@
+```bash
 **Técnicas de Evasión Avanzada**  
 *Módulos para evadir EDRs, AVs y análisis forense. Escrito en Python y C para máxima eficiencia.*  
 
