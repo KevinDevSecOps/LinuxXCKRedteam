@@ -1,4 +1,6 @@
 # LinuxXCKRedteam♦️
+![GitHub](https://img.shields.io/github/license/tu-usuario/repo?color=red)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 _____           ______      __  __         
 |  __ \ ___  ___|  ____|    |  \/  |_   _  
 | |__) / _ \/ __| |__ ______| |\/| | | | | 
