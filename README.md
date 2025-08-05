@@ -83,6 +83,10 @@ chmod +x install.sh && sudo ./install.sh --blood-red
 *(Mira el [Wiki](https://github.com/RedTeam-Xtreme/RedTeam-Xtreme/wiki) para más ejemplos brutales.)*  
 
 ---
+```markdown
+![Docker Compose](https://via.placeholder.com/800x400/000000/FFFFFF?text=RedTeam-Xtreme+Docker+Compose+Integration)
+```  
+
 
 ## **🎨 Capturas de Pantalla**  
 | **Escaneo Avanzado** | **Explotación** |  
